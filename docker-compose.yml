@@ -1,6 +1,19 @@
 version: '3.9'
 
 services:
+  app:
+    build: .
+    container_name: app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-aptekaplus:5432/aptekaplus
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+
   db-aptekaplus:
     image: postgres:15-alpine
     restart: always
@@ -16,6 +29,7 @@ services:
     command: -p 5432
     volumes:
       - data-aptekaplus:/var/lib/postgresql/data
+
 
 
 volumes:
